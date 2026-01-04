@@ -1,0 +1,59 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       String @id @default(uuid())
+  username String @unique
+  password String
+}
+
+model Project {
+  id          String         @id @default(uuid())
+  title       String
+  category    String
+  description String?
+  coverImage  String
+  coverVideo  String?
+  webLink     String?
+  date        DateTime       @default(now())
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+  
+  gallery     ProjectImage[]
+  blocks      Block[]
+}
+
+model ProjectImage {
+  id        String  @id @default(uuid())
+  url       String
+  caption   String?
+  projectId String
+  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+}
+
+model Block {
+  id        String  @id @default(uuid())
+  type      String  // 'text', 'image', 'video'
+  content   String  // text content or url
+  caption   String? 
+  order     Int
+  width     String  @default("full") // 'full', 'half'
+  projectId String
+  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+}
+
+model Page {
+  slug      String   @id
+  title     String?
+  content   String   // JSON string
+  updatedAt DateTime @updatedAt
+}

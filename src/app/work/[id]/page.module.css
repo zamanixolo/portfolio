@@ -1,0 +1,153 @@
+.article {
+    padding-bottom: 5rem;
+}
+
+.header {
+    min-height: 40vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 8rem 5vw 4rem;
+}
+
+.meta {
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.title {
+    font-family: var(--font-serif);
+    font-size: clamp(2.5rem, 6vw, 6rem);
+    line-height: 1;
+    font-weight: 300;
+}
+
+.editLink {
+    margin-top: 1rem;
+    font-size: 0.875rem;
+    color: var(--muted);
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.coverImage {
+    position: relative;
+    width: 100vw;
+    height: 80vh;
+    margin-bottom: 5rem;
+}
+
+.image {
+    object-fit: cover;
+}
+
+.content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 5vw;
+}
+
+.description {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    margin-bottom: 2rem;
+}
+
+.link {
+    display: inline-block;
+    font-family: var(--font-sans);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 0.875rem;
+    border-bottom: 1px solid white;
+    padding-bottom: 2px;
+}
+
+.gallery {
+    margin-top: 5rem;
+    padding: 0 5vw;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 5vw;
+}
+
+.galleryItem {
+    width: 100%;
+}
+
+.galleryImage {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Blocks */
+.blocksContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    max-width: 1400px;
+    margin: 5rem auto;
+    padding: 0 5vw;
+}
+
+.block {
+    width: 100%;
+}
+
+.half {
+    width: calc(50% - 1rem);
+}
+
+.full {
+    width: 100%;
+}
+
+.textBlock {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    line-height: 1.6;
+}
+
+.imageBlock {
+    position: relative;
+    width: 100%;
+}
+
+.blockImage {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.videoBlock {
+    position: relative;
+    padding-bottom: 56.25%;
+    /* 16:9 */
+    height: 0;
+    overflow: hidden;
+    background: black;
+}
+
+.iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+@media (max-width: 768px) {
+    .half {
+        width: 100%;
+    }
+}

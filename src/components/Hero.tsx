@@ -1,0 +1,114 @@
+'use client';
+import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import styles from './Hero.module.css';
+import { useAdmin } from '@/components/AdminProvider';
+import { useRouter } from 'next/navigation';
+
+export default function Hero() {
+    const { isAdmin, setCustomAction } = useAdmin();
+    const router = useRouter();
+    const [content, setContent] = useState<any>(null);
+    const [isEditing, setIsEditing] = useState(false);
+    const [saving, setSaving] = useState(false);
+
+    useEffect(() => {
+        fetch('/api/pages/home')
+            .then(res => res.json())
+            .then(data => setContent(data.content))
+            .catch(console.error);
+    }, []);
+
+    // Register custom action in Admin Toolbar
+    useEffect(() => {
+        if (!isAdmin) return;
+
+        // Only show if content is loaded
+        if (!content) return;
+
+        if (isEditing) {
+            setCustomAction(
+                <div className="flex gap-2">
+                    <button onClick={() => setIsEditing(false)} className="text-white/70 hover:text-white">Cancel</button>
+                    <button onClick={handleSave} className="bg-white text-black px-2 py-0.5 rounded text-xs font-bold hover:bg-gray-200">
+                        {saving ? 'Saving...' : 'Save'}
+                    </button>
+                </div>
+            );
+        } else {
+            setCustomAction(
+                <button
+                    onClick={() => setIsEditing(true)}
+                    className="text-white hover:text-white/80 underline"
+                >
+                    Edit Hero
+                </button>
+            );
+        }
+
+        return () => setCustomAction(null);
+    }, [isAdmin, isEditing, saving, content, setCustomAction]);
+
+    async function handleSave() {
+        setSaving(true);
+        try {
+            await fetch('/api/pages/home', {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ content })
+            });
+            setIsEditing(false);
+            router.refresh();
+        } catch (e) {
+            console.error(e);
+        } finally {
+            setSaving(false);
+        }
+    }
+
+    if (!content) return null;
+
+    return (
+        <section className={styles.hero + ' relative group'}>
+            {/* Local Controls Removed */}
+
+            <motion.h1
+                className={styles.title}
+                initial={{ opacity: 0, y: 100 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+            >
+                {isEditing ? (
+                    <div className="flex flex-col gap-2 mb-4">
+                        <input className="bg-transparent border-b border-white/20 outline-none text-5xl md:text-7xl font-serif" value={content.line1} onChange={e => setContent({ ...content, line1: e.target.value })} />
+                        <input className="bg-transparent border-b border-white/20 outline-none text-5xl md:text-7xl font-serif" value={content.line2} onChange={e => setContent({ ...content, line2: e.target.value })} />
+                        <input className="bg-transparent border-b border-white/20 outline-none text-5xl md:text-7xl font-serif" value={content.line3} onChange={e => setContent({ ...content, line3: e.target.value })} />
+                    </div>
+                ) : (
+                    <>
+                        <span className={styles.line}>{content.line1}</span>
+                        <span className={styles.line}>{content.line2}</span>
+                        <span className={styles.line}>{content.line3}</span>
+                    </>
+                )}
+            </motion.h1>
+
+            <motion.p
+                className={styles.subtitle}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.6, duration: 1 }}
+            >
+                {isEditing ? (
+                    <textarea
+                        className="w-full bg-transparent border border-white/20 outline-none resize-none h-[100px]"
+                        value={content.subtitle}
+                        onChange={e => setContent({ ...content, subtitle: e.target.value })}
+                    />
+                ) : (
+                    content.subtitle
+                )}
+            </motion.p>
+        </section>
+    );
+}
