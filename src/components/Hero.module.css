@@ -5,6 +5,20 @@
     justify-content: center;
 }
 
+.home-hero-title {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 5rem; /* left-20 is 5rem */
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
 .title {
     font-size: clamp(2.5rem, 6vw, 6rem);
     line-height: 0.9;
