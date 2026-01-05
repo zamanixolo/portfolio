@@ -102,7 +102,7 @@ export default function Hero() {
                 </div>
             )}
             
-            <div className="relative z-10 flex flex-col items-center justify-center w-full h-full">
+            <div className="absolute inset-0 z-10 flex flex-col items-center justify-center w-full h-full">
             <motion.h1
                 className={styles.title}
                 initial={{ opacity: 0, y: 100 }}
