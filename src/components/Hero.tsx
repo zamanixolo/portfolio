@@ -87,7 +87,7 @@ export default function Hero() {
     if (!content) return null;
 
     return (
-        <section className={styles.Hero_container + ' relative group overflow-hidden'} style={{ overflow: 'hidden !important' }}>
+        <section className={styles.Hero_container + ' relative group !overflow-hidden'}>
             {content.heroVideo && (
                 <div className="absolute inset-0 z-0">
                     <video
