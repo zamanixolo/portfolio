@@ -135,26 +135,23 @@ export default function Hero() {
                         </div>
                     </div>
                 </motion.h1>
-            )}
-
-            <motion.p
-                className={styles.subtitle}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.6, duration: 1 }}
-            >
-                {isEditing ? (
-                    <textarea
-                        className="w-full bg-transparent border border-white/20 outline-none resize-none h-[100px] text-center p-2"
-                        value={content.subtitle}
-                        onChange={e => setContent({ ...content, subtitle: e.target.value })}
-                        placeholder="Subtitle"
-                    />
-                ) : (
-                    content.subtitle
-                )}
-            </motion.p>
-            </div>
+                        )}
+                        
+                        {isEditing && ( // Conditionally render subtitle only in editing mode
+                            <motion.p
+                                className={styles.subtitle}
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ delay: 0.6, duration: 1 }}
+                            >
+                                <textarea
+                                    className="w-full bg-transparent border border-white/20 outline-none resize-none h-[100px] text-center p-2"
+                                    value={content.subtitle}
+                                    onChange={e => setContent({ ...content, subtitle: e.target.value })}
+                                    placeholder="Subtitle"
+                                />
+                            </motion.p>
+                        )}            </div>
         </section>
     );
 }
