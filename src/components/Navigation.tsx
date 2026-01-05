@@ -32,14 +32,16 @@ export default function Navigation() {
                     Portfolio
                 </Link>
                 
-                <button 
-                    className={styles.burger} 
-                    onClick={() => setIsOpen(!isOpen)}
-                    aria-label="Toggle menu"
-                >
-                    <div className={`${styles.burgerLine} ${isOpen ? styles.open : ''}`} />
-                    <div className={`${styles.burgerLine} ${isOpen ? styles.open : ''}`} />
-                </button>
+                <div className={styles.burgerWrapper}>
+                    <button 
+                        className={styles.burger} 
+                        onClick={() => setIsOpen(!isOpen)}
+                        aria-label="Toggle menu"
+                    >
+                        <div className={`${styles.burgerLine} ${isOpen ? styles.open : ''}`} />
+                        <div className={`${styles.burgerLine} ${isOpen ? styles.open : ''}`} />
+                    </button>
+                </div>
             </motion.nav>
 
             <AnimatePresence>

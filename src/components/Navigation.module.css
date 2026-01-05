@@ -28,35 +28,45 @@
     color: white; /* Ensure visible in difference mode */
 }
 
+.burgerWrapper {
+    width: 50px;
+    height: 50px;
+    background-color: black;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 101;
+    position: relative;
+}
+
 .burger {
-    width: 3rem;
-    height: 24px; /* Increased height to accommodate thicker bars */
+    width: 24px; /* Slightly smaller to fit inside circle */
+    height: 14px;
     background: transparent;
     border: none;
     cursor: pointer;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    z-index: 101;
-    position: relative;
     padding: 0;
-    mix-blend-mode: difference;
+    /* mix-blend-mode: difference; Removed mix-blend-mode as it's now on black bg */
 }
 
 .burgerLine {
     width: 100%;
-    height: 6px; /* Thicker bars */
-    background-color: white; /* Difference mode requires white to invert */
+    height: 2px; /* Standard bars */
+    background-color: white; /* White on black */
     transition: transform 0.3s ease, opacity 0.3s ease;
     transform-origin: center;
 }
 
 .burgerLine.open:first-child {
-    transform: translateY(9px) rotate(45deg);
+    transform: translateY(6px) rotate(45deg);
 }
 
 .burgerLine.open:last-child {
-    transform: translateY(-9px) rotate(-45deg);
+    transform: translateY(-6px) rotate(-45deg);
 }
 
 .menuOverlay {
