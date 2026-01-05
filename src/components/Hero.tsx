@@ -97,7 +97,7 @@ export default function Hero() {
                         loop
                         playsInline
                         className="w-full h-full object-cover opacity-50"
-                        style={{ width: '100%' }}
+                        style={{ width: '100%', height: '80vh' }}
                     />
                 </div>
             )}
