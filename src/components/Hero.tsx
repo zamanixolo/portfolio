@@ -88,18 +88,6 @@ export default function Hero() {
 
     return (
         <section className={styles.hero + ' relative group overflow-hidden'}>
-            {content.heroVideo && (
-                <div className="absolute inset-0 z-0">
-                    <video
-                        src={content.heroVideo}
-                        autoPlay
-                        muted
-                        loop
-                        playsInline
-                        className="w-full h-full object-cover opacity-50"
-                    />
-                </div>
-            )}
             
             <div className="relative z-10 flex flex-col items-center justify-center w-full h-full">
             <motion.h1
@@ -114,22 +102,6 @@ export default function Hero() {
                             <input className="bg-transparent border-b border-white/20 outline-none text-5xl md:text-7xl font-serif text-center" value={content.line1} onChange={e => setContent({ ...content, line1: e.target.value })} placeholder="Line 1" />
                             <input className="bg-transparent border-b border-white/20 outline-none text-5xl md:text-7xl font-serif text-center" value={content.line2} onChange={e => setContent({ ...content, line2: e.target.value })} placeholder="Line 2" />
                             <input className="bg-transparent border-b border-white/20 outline-none text-5xl md:text-7xl font-serif text-center" value={content.line3} onChange={e => setContent({ ...content, line3: e.target.value })} placeholder="Line 3" />
-                        </div>
-                        
-                        <div className="flex items-center gap-2 mt-4 bg-black/50 p-2 rounded">
-                            <span className="text-sm text-white/70">Background Video:</span>
-                            <label className="cursor-pointer bg-white text-black px-3 py-1 rounded text-sm hover:bg-gray-200">
-                                Upload Video
-                                <input type="file" accept="video/mp4,video/webm" hidden onChange={handleVideoUpload} />
-                            </label>
-                            {content.heroVideo && (
-                                <button 
-                                    onClick={() => setContent({ ...content, heroVideo: null })}
-                                    className="text-red-400 text-sm hover:text-red-300 ml-2"
-                                >
-                                    Remove
-                                </button>
-                            )}
                         </div>
                     </div>
                 ) : (
