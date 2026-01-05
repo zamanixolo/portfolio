@@ -96,7 +96,7 @@ export default function Hero() {
                         muted
                         loop
                         playsInline
-                        className="w-full h-full object-cover opacity-50"
+                        className={`w-full h-full object-${content.heroVideoObjectFit || 'cover'} opacity-50`}
                     />
                 </div>
             )}
@@ -123,12 +123,23 @@ export default function Hero() {
                                 <input type="file" accept="video/mp4,video/webm" hidden onChange={handleVideoUpload} />
                             </label>
                             {content.heroVideo && (
-                                <button 
-                                    onClick={() => setContent({ ...content, heroVideo: null })}
-                                    className="text-red-400 text-sm hover:text-red-300 ml-2"
-                                >
-                                    Remove
-                                </button>
+                                <>
+                                    <button 
+                                        onClick={() => setContent({ ...content, heroVideo: null })}
+                                        className="text-red-400 text-sm hover:text-red-300 ml-2"
+                                    >
+                                        Remove
+                                    </button>
+                                    <select
+                                        value={content.heroVideoObjectFit || 'cover'}
+                                        onChange={(e) => setContent({ ...content, heroVideoObjectFit: e.target.value })}
+                                        className="bg-white text-black px-2 py-0.5 rounded text-xs ml-2"
+                                    >
+                                        <option value="cover">Cover</option>
+                                        <option value="contain">Contain</option>
+                                        <option value="fill">Fill</option>
+                                    </select>
+                                </>
                             )}
                         </div>
                     </div>
