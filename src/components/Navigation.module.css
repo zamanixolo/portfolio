@@ -8,10 +8,11 @@
     justify-content: space-between;
     align-items: center;
     z-index: 100;
+    pointer-events: none; /* Allow clicking through nav area */
 }
 
-.hidden {
-    display: none !important;
+.nav > * {
+    pointer-events: auto; /* Re-enable pointer events for children */
 }
 
 .logo {
@@ -20,56 +21,100 @@
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: -0.02em;
+    z-index: 101;
+    position: relative;
+    mix-blend-mode: difference;
+    color: white; /* Ensure visible in difference mode */
 }
 
-.links {
+.burger {
+    width: 30px;
+    height: 20px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
     display: flex;
-    gap: 2rem;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 101;
+    position: relative;
+    padding: 0;
+    mix-blend-mode: difference;
+}
+
+.burgerLine {
+    width: 100%;
+    height: 2px;
+    background-color: white; /* Difference mode requires white to invert */
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    transform-origin: center;
+}
+
+.burgerLine.open:first-child {
+    transform: translateY(9px) rotate(45deg);
+}
+
+.burgerLine.open:last-child {
+    transform: translateY(-9px) rotate(-45deg);
+}
+
+.menuOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--background);
+    z-index: 99;
+    display: flex;
+    justify-content: center;
     align-items: center;
 }
 
-.link {
+.menuLinks {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+    text-align: center;
+}
+
+.menuLink {
     font-family: var(--font-scope);
-    font-size: 0.875rem;
+    font-size: 3rem;
+    font-weight: 300;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-    opacity: 0.8;
+    letter-spacing: -0.02em;
+    opacity: 0;
+    animation: fadeIn 0.5s forwards;
     transition: opacity 0.3s ease;
-    position: relative;
 }
 
-.link:hover {
-    opacity: 1;
+.menuLink:hover {
+    opacity: 0.7;
 }
 
-.link::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    width: 100%;
-    height: 1px;
-    background-color: currentColor;
-    transform: scaleX(0);
-    transform-origin: right;
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+.menuLink:nth-child(1) { animation-delay: 0.1s; }
+.menuLink:nth-child(2) { animation-delay: 0.2s; }
+.menuLink:nth-child(3) { animation-delay: 0.3s; }
+
+.themeToggleWrapper {
+    margin-top: 2rem;
+    animation: fadeIn 0.5s forwards 0.4s;
+    opacity: 0;
 }
 
-.link:hover::after {
-    transform: scaleX(1);
-    transform-origin: left;
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 @media (max-width: 768px) {
     .nav {
         padding: 1.5rem;
     }
-
-    .links {
-        gap: 1rem;
-    }
-
-    .link {
-        font-size: 0.75rem;
+    
+    .menuLink {
+        font-size: 2rem;
     }
 }
