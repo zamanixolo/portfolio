@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import styles from './Hero.module.css';
 import { useAdmin } from '@/components/AdminProvider';
 import { useRouter } from 'next/navigation';
+import ScrollHint from './ScrollHint';
 
 export default function Hero() {
     const { isAdmin, setCustomAction } = useAdmin();
@@ -152,6 +153,8 @@ export default function Hero() {
                                 />
                             </motion.p>
                         )}            </div>
+            
+            <ScrollHint />
         </section>
     );
 }
