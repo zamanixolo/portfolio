@@ -104,13 +104,13 @@ export default function Hero() {
             )}
             
             <div className={styles['home-hero-title']}>
-            <motion.h1
-                className={styles.title}
-                initial={{ opacity: 0, y: 100 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-            >
-                {isEditing ? (
+            {isEditing && ( // Conditionally render h1 only in editing mode
+                <motion.h1
+                    className={styles.title}
+                    initial={{ opacity: 0, y: 100 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                >
                     <div className="flex flex-col gap-4 mb-4 items-center">
                         <div className="flex flex-col gap-2 w-full max-w-2xl">
                             <input className="bg-transparent border-b border-white/20 outline-none text-5xl md:text-7xl font-serif text-center" value={content.line1} onChange={e => setContent({ ...content, line1: e.target.value })} placeholder="Line 1" />
@@ -134,14 +134,8 @@ export default function Hero() {
                             )}
                         </div>
                     </div>
-                ) : (
-                    <>
-                        <span className={styles.line}>{content.line1}</span>
-                        <span className={styles.line}>{content.line2}</span>
-                        <span className={styles.line}>{content.line3}</span>
-                    </>
-                )}
-            </motion.h1>
+                </motion.h1>
+            )}
 
             <motion.p
                 className={styles.subtitle}
