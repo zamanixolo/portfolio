@@ -5,10 +5,10 @@
 
 .gridContainer {
     grid-template-columns: repeat(2, 1fr);
-    gap: 0vw 4vw;
-    margin-top: 5vh;
-    padding: 0 5vw;
+    margin-top: 10vh;
     display: grid;
+    gap: 0px 4vw;
+    padding: 0px 5vw;
 }
 
 /* Offset every second item for a staggered look */
