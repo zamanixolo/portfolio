@@ -3,17 +3,13 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 0 5vw;
 }
 
 .title {
-    font-family: var(--font-serif);
-    font-size: clamp(3rem, 10vw, 9rem);
+    font-size: clamp(2.5rem, 6vw, 6rem);
     line-height: 0.9;
+    letter-spacing: -0.05em;
     font-weight: 300;
-    letter-spacing: -0.03em;
-    display: flex;
-    flex-direction: column;
 }
 
 .line {
