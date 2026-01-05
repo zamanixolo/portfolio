@@ -79,6 +79,6 @@ img {
 }
 
 [data-theme='dark'] .main-nav {
-  background-color: var(--background);
+  /* background-color: var(--background); */
   color: white;
 }
