@@ -4,11 +4,9 @@
 }
 
 .gridContainer {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 8vw 4vw;
-  padding: 0 5vw;
-  margin-top: 5vh;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 0 4vw;
 }
 
 /* Offset every second item for a staggered look */
