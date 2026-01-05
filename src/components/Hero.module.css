@@ -46,7 +46,10 @@
 /* Mobile specific styles */
 @media (max-width: 768px) {
     .videoMobileHeight {
-        height: 100vh !important;
+        /* position: absolute; */
+        left: 50%;
+        transform: translateX(-50%);
         width: auto !important;
+        height: 100vh !important;
     }
 }
