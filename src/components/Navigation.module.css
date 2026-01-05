@@ -29,7 +29,7 @@
 }
 
 .burger {
-    width: 30px;
+    width: 3rem;
     height: 24px; /* Increased height to accommodate thicker bars */
     background: transparent;
     border: none;
