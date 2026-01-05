@@ -48,8 +48,5 @@
     .videoMobileHeight {
         height: 100vh !important;
         width: auto !important;
-        position: absolute; /* Needs absolute positioning to use left/transform */
-        left: 50%;
-        transform: translateX(-50%);
     }
 }
