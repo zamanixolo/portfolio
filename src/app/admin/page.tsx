@@ -14,7 +14,7 @@ export const dynamic = 'force-dynamic';
 export default async function AdminPage() {
     const projects = await prisma.project.findMany({
         orderBy: [
-            { order: 'asc' },
+            { order: 'asc' as const },
             { date: 'desc' }
         ]
     });
