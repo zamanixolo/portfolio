@@ -46,7 +46,8 @@
 /* Mobile specific styles */
 @media (max-width: 768px) {
     .videoMobileHeight {
-        height: 100vh !important;
         width: auto !important;
+        height: 100vh !important;
+        transform: translateX(-100vw);
     }
 }
