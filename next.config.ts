@@ -8,7 +8,7 @@ const nextConfig: NextConfig = {
         './public/uploads/**',
       ],
     },
-  },
+  } as any,
   images: {
     remotePatterns: [
       {
