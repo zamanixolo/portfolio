@@ -14,6 +14,11 @@ export async function optimizeImage(buffer: Buffer, originalFilename: string): P
     let pipeline = sharp(buffer);
     const metadata = await pipeline.metadata();
 
+    // Resize image if wider than 2400px
+    if (metadata.width && metadata.width > 2400) {
+        pipeline = pipeline.resize({ width: 2400, withoutEnlargement: true });
+    }
+
     // Check if PNG has transparency
     const isPng = ext === '.png';
     const hasTransparency = isPng && (metadata.hasAlpha || metadata.channels === 4);
