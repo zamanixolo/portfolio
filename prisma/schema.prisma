@@ -17,19 +17,22 @@ model User {
 }
 
 model Project {
-  id          String         @id @default(uuid())
+  id          String   @id @default(uuid())
   title       String
+  description String
+  date        DateTime
   category    String
-  description String?
-  coverImage  String
-  coverVideo  String?
+  coverImage  String?
+  coverVideo  String?  // Optional video for hover/preview
   webLink     String?
-  date        DateTime       @default(now())
-  createdAt   DateTime       @default(now())
-  updatedAt   DateTime       @updatedAt
-  
   gallery     ProjectImage[]
   blocks      Block[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  layoutAlignment String @default("center") // center, left, right
+  order       Int      @default(0)
+  backgroundColor String? // Hex code or similar
+  textColor       String? // Hex code or similar
 }
 
 model ProjectImage {
@@ -47,6 +50,8 @@ model Block {
   caption   String? 
   order     Int
   width     String  @default("full") // 'full', 'half'
+  alignment String  @default("left") // 'left', 'center', 'right'
+  autoplay  Boolean @default(false)
   projectId String
   project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
 }

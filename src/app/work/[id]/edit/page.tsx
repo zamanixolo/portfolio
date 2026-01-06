@@ -2,6 +2,8 @@ import { prisma } from '@/lib/db';
 import { notFound } from 'next/navigation';
 import BlockEditor from '@/components/BlockEditor';
 
+export const dynamic = 'force-dynamic';
+
 interface PageProps {
     params: Promise<{ id: string }>;
 }

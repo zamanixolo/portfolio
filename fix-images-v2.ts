@@ -80,7 +80,7 @@ async function main() {
         // We know there are 3 blocks. Let's just update all of them if they look like Unsplash urls (which they do) 
         // to be sure, or specifically find the broken ones. 
         // Logic: Just cycle through valid images for the 3 blocks.
-        const validImages = [validCover, altImage1, altImage2];
+        const validImages = [validCover || altImage1, altImage1, altImage2];
 
         for (let i = 0; i < aesopProject.blocks.length; i++) {
             const block = aesopProject.blocks[i];

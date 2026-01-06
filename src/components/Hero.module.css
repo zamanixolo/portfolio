@@ -48,6 +48,6 @@
     .videoMobileHeight {
         width: auto !important;
         height: 100vh !important;
-        transform: translateX(-100vw);
+        /* transform: translateX(-100vw); */
     }
 }

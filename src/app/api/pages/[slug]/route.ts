@@ -7,8 +7,9 @@ export async function GET(
 ) {
     try {
         const slug = (await params).slug;
-        const pages = await prisma.$queryRaw<any[]>`SELECT * FROM Page WHERE slug = ${slug} LIMIT 1`;
-        const page = pages[0];
+        const page = await prisma.page.findUnique({
+            where: { slug }
+        });
 
         if (!page) {
             return NextResponse.json({ error: 'Page not found' }, { status: 404 });
@@ -31,16 +32,12 @@ export async function PUT(
     const slug = (await params).slug;
     const body = await request.json();
     const newContent = JSON.stringify(body.content);
-    const now = new Date().toISOString();
-
-    // Validate existence
-    const pages = await prisma.$queryRaw<any[]>`SELECT * FROM Page WHERE slug = ${slug} LIMIT 1`;
-    if (pages.length === 0) {
-        return NextResponse.json({ error: 'Page not found' }, { status: 404 });
-    }
 
     try {
-        await prisma.$executeRaw`UPDATE Page SET content = ${newContent}, updatedAt = ${now} WHERE slug = ${slug}`;
+        await prisma.page.update({
+            where: { slug },
+            data: { content: newContent }
+        });
         return NextResponse.json({ success: true });
     } catch (error) {
         console.error(error);

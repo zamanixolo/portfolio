@@ -24,6 +24,7 @@ export async function POST(request: NextRequest) {
                 title,
                 category,
                 description,
+                date: new Date(), // Default to current date
                 coverImage,
                 coverVideo,
                 webLink,

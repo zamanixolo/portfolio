@@ -22,11 +22,20 @@
     margin-bottom: 4rem;
 }
 
-.title {
-    font-family: var(--font-serif);
-    font-size: 2rem;
-    margin-bottom: 2rem;
-    font-weight: 300;
+.managePagesButton {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background: #0070f3;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.2s;
+    margin-top: 1rem;
+}
+
+.managePagesButton:hover {
+    background: #0056b3;
 }
 
 .subtitle {

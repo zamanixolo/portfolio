@@ -3,17 +3,17 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
 const ThemeContext = createContext({
-  theme: "light",
+  theme: "dark", // Changed default to dark
   toggleTheme: () => {},
 });
 
 export const useTheme = () => useContext(ThemeContext);
 
 export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState("dark"); // Changed initial state to dark
 
   useEffect(() => {
-    const storedTheme = localStorage.getItem("theme") || "light";
+    const storedTheme = localStorage.getItem("theme") || "dark"; // Changed default for stored theme to dark
     setTheme(storedTheme);
   }, []);
 

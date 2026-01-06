@@ -39,18 +39,23 @@
 .coverImage {
     position: relative;
     width: 100vw;
-    height: 80vh;
-    margin-bottom: 5rem;
+    aspect-ratio: 4/3;
+    margin-bottom: 0;
+    overflow: hidden;
 }
 
 .image {
+    position: absolute; /* Ensure positioning for parallax */
+    width: 100%;
+    height: 120%; /* Increased height for parallax */
+    top: -10%; /* Center the larger image */
     object-fit: cover;
 }
 
 .content {
     max-width: 800px;
     margin: 0 auto;
-    padding: 0 5vw;
+    padding: 4rem 5vw 0; /* Adjusted padding to control space above description */
 }
 
 .description {
@@ -59,6 +64,7 @@
     line-height: 1.6;
     white-space: pre-wrap;
     margin-bottom: 2rem;
+    margin-top: 0; /* Remove default top margin from browser */
 }
 
 .link {
@@ -93,10 +99,27 @@
 .blocksContainer {
     display: flex;
     flex-wrap: wrap;
-    gap: 2rem;
-    max-width: 1400px;
-    margin: 5rem auto;
+    gap: 6rem; /* Changed from 2rem to 6rem */
+    max-width: 1800px;
+    margin-top: 5rem; /* Default center, overriden by specific alignment classes if present */
+    margin-left: auto;
+    margin-right: auto;
     padding: 0 5vw;
+}
+
+.alignCenter {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.alignLeft {
+    margin-left: 0;
+    margin-right: auto;
+}
+
+.alignRight {
+    margin-left: auto;
+    margin-right: 0;
 }
 
 .block {
@@ -104,12 +127,40 @@
 }
 
 .half {
-    width: calc(50% - 1rem);
+    width: calc(50% - 3rem);
+}
+
+.third {
+    width: calc((100% - 12rem) / 3);
+}
+
+.quarter {
+    width: calc((100% - 18rem) / 4);
 }
 
 .full {
     width: 100%;
 }
+
+/* Block Alignment Classes (Flex Item Positioning) */
+.blockAlignLeft {
+    margin-right: auto;
+}
+
+.blockAlignCenter {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.blockAlignRight {
+    margin-left: auto;
+}
+
+/* Optional: Helper to keep text alignment if needed, or user can assume block move implies text alignment? 
+   User said "text align works but I meant justify", implying they didn't want text align ONLY. 
+   I will leave text align separate or remove it. 
+   I'll remove the specific textAlign classes I added previously to replace them. 
+*/
 
 .textBlock {
     font-family: var(--font-serif);
@@ -128,13 +179,19 @@
     display: block;
 }
 
-.videoBlock {
+.videoEmbed {
     position: relative;
     padding-bottom: 56.25%;
     /* 16:9 */
     height: 0;
     overflow: hidden;
     background: black;
+}
+
+.nativeVideo {
+    width: 100%;
+    height: auto;
+    display: block;
 }
 
 .iframe {
@@ -146,8 +203,43 @@
     border: 0;
 }
 
+/* Similar Projects */
+.similarSection {
+    margin-top: 5rem;
+    padding-bottom: 5rem;
+}
+
+.similarTitle {
+    padding: 0 5vw;
+    font-family: var(--font-serif);
+    font-size: 2rem;
+    margin-bottom: 4rem;
+    font-weight: 300;
+}
+
+.gridContainer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8vw 4vw;
+    padding: 0 5vw;
+}
+
+/* Offset every second item for a staggered look */
+.gridContainer>div:nth-child(even) {
+    margin-top: 10vh;
+}
+
 @media (max-width: 768px) {
-    .half {
+    .half, .third, .quarter {
         width: 100%;
+    }
+
+    .gridContainer {
+        grid-template-columns: 1fr;
+        gap: 5rem;
+    }
+
+    .gridContainer>div:nth-child(even) {
+        margin-top: 0;
     }
 }

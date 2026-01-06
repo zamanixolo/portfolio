@@ -97,13 +97,12 @@ export default function Hero() {
                         muted
                         loop
                         playsInline
-                        className={`w-full h-full object-cover opacity-50 ${styles.videoMobileHeight}`}
+                        className={`w-full h-full object-cover  ${styles.videoMobileHeight}`}
                         style={{ width: '100vw', height: 'auto' }}
                     />
-                    <div className="absolute inset-0 bg-black opacity-10 z-10" /> {/* Transparent black overlay */}
                 </div>
             )}
-            
+            <div className="absolute inset-0 bg-black opacity-50 z-100" /> {/* Transparent black overlay */}
             <div className={styles['home-hero-title']}>
             {isEditing && ( // Conditionally render h1 only in editing mode
                 <motion.h1

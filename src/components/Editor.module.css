@@ -7,7 +7,7 @@
 /* Floating Toolbar */
 .toolbar {
     position: fixed;
-    bottom: 2rem;
+    bottom: 6rem;
     left: 50%;
     transform: translateX(-50%);
     z-index: 1000;
@@ -24,6 +24,9 @@
     align-items: center;
     gap: 1.5rem;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    max-width: 90vw;
+    overflow-x: auto;
+    /* Allow scrolling on very small screens */
 }
 
 .toolbarTitle {
@@ -34,24 +37,57 @@
     color: #666;
     border-right: 1px solid #333;
     padding-right: 1.5rem;
+    white-space: nowrap;
 }
 
 .toolbarActions {
     display: flex;
     gap: 0.5rem;
+    align-items: center;
+}
+
+@media (max-width: 768px) {
+    .toolbarInner {
+        flex-wrap: wrap;
+        justify-content: center;
+        border-radius: 20px;
+        gap: 0.75rem;
+        padding: 0.75rem;
+        width: 95vw;
+    }
+
+    .toolbarTitle {
+        border-right: none;
+        padding-right: 0;
+        width: 100%;
+        text-align: center;
+        border-bottom: 1px solid #333;
+        padding-bottom: 0.5rem;
+        margin-bottom: 0.25rem;
+    }
+
+    .toolbarActions {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
 }
 
 .toolbarBtn {
     background: white;
     color: black;
     border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 30px;
+    width: 2.5rem; /* Fixed width */
+    height: 2.5rem; /* Fixed height for 1:1 aspect ratio */
+    border-radius: 50%; /* Make them circular */
+    display: flex; /* Use flexbox for centering */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
     font-family: var(--font-sans);
     font-size: 0.75rem;
     font-weight: 600;
     cursor: pointer;
     transition: transform 0.1s;
+    padding: 0; /* Remove padding for precise sizing */
 }
 
 .toolbarBtn:hover {
@@ -179,4 +215,36 @@
     padding: 0.2rem 0.5rem;
     cursor: pointer;
     border-radius: 2px;
+}
+
+.coverEditOverlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 30px;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.2s;
+    font-family: var(--font-sans);
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    z-index: 20;
+}
+
+.coverEditOverlay:hover {
+    background: white;
+    color: black;
+}
+
+.editableCover {
+    position: relative;
+}
+
+.editableCover:hover .coverEditOverlay {
+    opacity: 1;
 }

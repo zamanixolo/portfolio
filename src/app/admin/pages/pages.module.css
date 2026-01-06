@@ -1,0 +1,62 @@
+.container {
+    padding: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.backLink {
+    display: inline-block;
+    margin-bottom: 2rem;
+    color: #0070f3;
+    text-decoration: none;
+}
+
+.backLink:hover {
+    text-decoration: underline;
+}
+
+.title {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: white;
+}
+
+.pageList {
+    display: grid;
+    gap: 1rem;
+}
+
+.pageItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 8px;
+    text-decoration: none;
+    color: white;
+    transition: background 0.2s, border-color 0.2s;
+}
+
+.pageItem:hover {
+    background: #2a2a2a;
+    border-color: #555;
+}
+
+.pageItem h2 {
+    font-size: 1.25rem;
+    margin: 0;
+    text-transform: capitalize;
+}
+
+.pageItem p {
+    font-size: 0.875rem;
+    color: #aaa;
+    margin: 0;
+}
+
+.editButton {
+    color: #0070f3;
+    font-weight: bold;
+}
