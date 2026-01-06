@@ -14,44 +14,42 @@ export async function optimizeImage(buffer: Buffer, originalFilename: string): P
     let pipeline = sharp(buffer);
     const metadata = await pipeline.metadata();
 
-    // Resize image if wider than 2400px
-    if (metadata.width && metadata.width > 2400) {
-        pipeline = pipeline.resize({ width: 2400, withoutEnlargement: true });
+    // Resize image if wider than 1920px
+    if (metadata.width && metadata.width > 1920) {
+        pipeline = pipeline.resize({ width: 1920, withoutEnlargement: true });
     }
 
-    // Check if PNG has transparency
-    const isPng = ext === '.png';
-    const hasTransparency = isPng && (metadata.hasAlpha || metadata.channels === 4);
+    // Check if image has transparency
+    const hasTransparency = metadata.hasAlpha || metadata.channels === 4;
 
-    if (isPng && hasTransparency) {
-        // Optimize PNG but keep format and transparency
+    if (hasTransparency) {
+        // Convert to WebP lossless for transparent images
         const optimizedBuffer = await pipeline
-            .png({ 
-                quality: 85, 
-                compressionLevel: 9, 
-                palette: true 
+            .webp({ 
+                quality: 100, // Lossless compression
+                lossless: true,
+                effort: 6
             })
             .toBuffer();
             
         return {
             buffer: optimizedBuffer,
-            filename: originalFilename, // Keep original extension
-            mimeType: 'image/png'
+            filename: `${name}.webp`, // Use webp extension
+            mimeType: 'image/webp'
+        };
+    } else {
+        // For opaque images, convert to WebP lossy
+        const optimizedBuffer = await pipeline
+            .webp({ 
+                quality: 80, 
+                effort: 6 // Higher effort = better compression, slower processing
+            })
+            .toBuffer();
+
+        return {
+            buffer: optimizedBuffer,
+            filename: `${name}.webp`,
+            mimeType: 'image/webp'
         };
     }
-
-    // For everything else (JPEG, non-transparent PNG, etc.), convert to WebP
-    // WebP offers superior compression with comparable quality
-    const optimizedBuffer = await pipeline
-        .webp({ 
-            quality: 80, 
-            effort: 6 // Higher effort = better compression, slower processing
-        })
-        .toBuffer();
-
-    return {
-        buffer: optimizedBuffer,
-        filename: `${name}.webp`,
-        mimeType: 'image/webp'
-    };
 }
